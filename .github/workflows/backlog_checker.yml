@@ -62,7 +62,7 @@ jobs:
           key: ${{ secrets.REDMINE_API_KEY }}
           fun: "gha_untriaged_qa"
       - name: Commit files
-        if: always()
+        if: diff README.md index.md
         run: |
           rm -f README.md
           mv index.md README.md
@@ -71,7 +71,6 @@ jobs:
           git add README.md
           git commit --amend --no-edit
       - name: Push changes
-        if: always()
         uses: ad-m/github-push-action@master
         with:
           force: true
